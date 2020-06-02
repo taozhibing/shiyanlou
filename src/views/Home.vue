@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import NavTitle from '../components/home/NavTitle'
+import Navtitle from '../components/home/Navtitle'
 import Nbv from '../components/home/Nbv'
 import Ncv from '../components/home/Ncv'
  export default {
@@ -20,7 +20,7 @@ import Ncv from '../components/home/Ncv'
      }
    },
    components: {
-     NavTitle,
+     Navtitle,
      Nbv,
      Ncv
 

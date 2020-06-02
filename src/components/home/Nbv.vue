@@ -48,6 +48,36 @@
               <div class="itemb-1">课程推荐</div>
             </div>
           </div>
+           <div class="l-item">
+            <div class="item">
+              <a class="item-a" href>数据库</a>
+              <a class="item-a" href>SQL</a>
+              <a class="item-a" href>NoSQL</a>
+            </div>
+            <div class="item-b">
+              <div class="itemb-1">数据库</div>
+              <div class="itemb-2">
+                <a class="itemb-3">SQL</a>
+                <a class="itemb-3">NoSQL</a>
+              </div>
+              <div class="itemb-1">课程推荐</div>
+            </div>
+          </div>
+              <div class="l-item">
+            <div class="item">
+              <a class="item-a" href>信息安全</a>
+              <a class="item-a" href>Web安全</a>
+              <a class="item-a" href>安全开发</a>
+            </div>
+            <div class="item-b">
+              <div class="itemb-1">信息安全</div>
+              <div class="itemb-2">
+                <a class="itemb-3">Web安全</a>
+                <a class="itemb-3">安全开发</a>
+              </div>
+              <div class="itemb-1">课程推荐</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -55,14 +85,31 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: {},
   data() {
-    return {};
+    return {
+      list:[]
+    };
   },
   components: {},
-  methods: {},
-  mounted() {},
+  methods: {
+     getData() {
+      axios
+        .get(" http://120.78.14.107/api/v2/index/categories")
+        .then(res => {
+          this.list = res.data.tags;
+          this.$emit("getList", this.list);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+  mounted() {
+    this.getData();
+  },
   watch: {},
   computed: {}
 };
@@ -74,7 +121,6 @@ export default {
   display: flex;
   justify-content: center;
   background: rgb(255, 204, 51);
-  margin-top: 10px;
   height: 515px;
 }
 .mildle {
@@ -86,6 +132,7 @@ export default {
 .left {
   width: 260px;
   background: rgba(0, 0, 0, 0.18);
+  margin-left: 5px;
 }
 .l-item {
   display: flex;
