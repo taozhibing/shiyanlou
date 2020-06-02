@@ -1,36 +1,36 @@
 <template>
  <div>
+<div>
 <navtitle></navtitle>
-<navindex></navindex>
-<nav></nav>
+<nbv></nbv>
+<ncv></ncv>
+</div>
  </div>
 </template>
 
 <script>
-import Navtitle from '../components/home/Navtitle'
-import Nav from '../components/home/Nav'
-import NavIndex from '../components/home/NavIndex'
+import NavTitle from '../components/home/NavTitle'
+import Nbv from '../components/home/Nbv'
+import Ncv from '../components/home/Ncv'
  export default {
    data () {
      return {
-       arr : ''
+       list:[]
 
      }
    },
    components: {
-     Navtitle,
-     NavIndex,
-     Nav
+     NavTitle,
+     Nbv,
+     Ncv
 
    },
    methods: {
-     getClass(data) {
-       this.arr = data
+     getList(data) {
+       this.list = data
      }
-
    },
    mounted() {
-
    },
    watch: {
 
