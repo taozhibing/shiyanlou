@@ -1,8 +1,8 @@
 <template>
  <div>
 <navtitle></navtitle>
-<nav :arr="arr"></nav>
 <navindex></navindex>
+<nav></nav>
  </div>
 </template>
 
@@ -19,6 +19,7 @@ import NavIndex from '../components/home/NavIndex'
    },
    components: {
      Navtitle,
+     NavIndex,
      Nav
 
    },
