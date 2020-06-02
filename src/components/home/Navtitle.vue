@@ -8,16 +8,16 @@
           <span class="item">做实验，学编程</span>
           </div>
           <div class="n-left">
-            <div class="nl">企业版</div>
+           <a href=""> <div class="nl">企业版</div></a>
             <div class="nl-1"></div>
-            <div class="nl">学校版</div>
-            <div class="nl-3">登陆</div>
-            <div class="nl-2" >注册</div>
+            <a href=""><div class="nl">学校版</div></a>
+            <a href=""><div class="nl-3">登陆</div></a>
+            <a href=""><div class="nl-2" >注册</div></a>
           </div>
         </div>
         <div class="n-foot">
         <div class="nf1">
-          <div class="nf2"><img src="../home/pic/1.png" alt=""><a class="anf" href="https:409236083@qq.com">全部课程</a></div>
+          <div class="nf2"><img src="../home/pic/1.png" alt=""><a class="anf" href="">全部课程</a></div>
         </div>
         <div class="nf3">
           <div class="nf4">
