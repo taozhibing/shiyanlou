@@ -17,9 +17,7 @@ import Ndv from '../components/home/Ndv'
  export default {
    data () {
      return {
-       list:[],
-       arr : []
-
+      
      }
    },
    components: {
@@ -30,15 +28,7 @@ import Ndv from '../components/home/Ndv'
 
    },
    methods: {
-     getList(data) {
-       this.list = data
-     },
-     getArr(data) {
-       this.arr = data
-     },
-     getArr1(data) {
-       this.arr1 = data
-     }
+    
    },
    mounted() {
    },

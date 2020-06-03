@@ -1,106 +1,88 @@
 <template>
   <div>
     <div class="box">
-      <div class="mildle">
-        <div class="left">
-          <div class="l-item">
-            <div class="item">
-              <a class="item-a" href>后端开发</a>
-              <a class="item-a" href>Python</a>
-              <a class="item-a" href>PHP</a>
-            </div>
-            <div class="item-b">
-              <div class="itemb-1">后端开发</div>
-              <div class="itemb-2">
-                <a class="itemb-3">Python</a>
-                <a class="itemb-3">Python</a>
+      <div class="box_aaa">
+        <div class="mildle">
+          <div class="left">
+            <div class="l-item" v-for="(item,index) in obj" :key="index">
+              <div class="item">
+                <a class="item-a" href>{{item.name}}</a>
+                <a class="item-a" href>{{item.tags[0].name}}</a>
+                <a class="item-a" href>{{item.tags[1].name}}</a>
               </div>
-              <div class="itemb-1">课程推荐</div>
-            </div>
-          </div>
-          <div class="l-item">
-            <div class="item">
-              <a class="item-a" href>Linux运维</a>
-              <a class="item-a" href>Linux</a>
-              <a class="item-a" href>Shell</a>
-            </div>
-            <div class="item-b">
-              <div class="itemb-1">Linux运维</div>
-              <div class="itemb-2">
-                <a class="itemb-3">Python</a>
-                <a class="itemb-3">Python</a>
+              <div class="item-b" :style="{ top: index > 3 ? ((-57 * (index-4))-40)+'px' : '0px' }">
+                <div class="itemb-1">{{item.name}}</div>
+                <div class="itemb-2">
+                  <a
+                    class="itemb-3"
+                    v-for="(item1,index1) in item.tags"
+                    :key="index1"
+                  >{{item1.name}}</a>
+                </div>
+                <div class="itemb-1">课程推荐</div>
+                <div
+                  class="itemb-4"
+                  v-for="(item2,index2) in item.recommend_courses"
+                  :key="index2"
+                >{{item2.name}}</div>
               </div>
-              <div class="itemb-1">课程推荐</div>
-            </div>
-          </div>
-          <div class="l-item">
-            <div class="item">
-              <a class="item-a" href>云计算与大数据</a>
-              <a class="item-a" href>Hadoop</a>
-              <a class="item-a" href>Spark</a>
-            </div>
-            <div class="item-b">
-              <div class="itemb-1">云计算与大数据</div>
-              <div class="itemb-2">
-                <a class="itemb-3">Python</a>
-                <a class="itemb-3">Python</a>
-              </div>
-              <div class="itemb-1">课程推荐</div>
-            </div>
-          </div>
-           <div class="l-item">
-            <div class="item">
-              <a class="item-a" href>数据库</a>
-              <a class="item-a" href>SQL</a>
-              <a class="item-a" href>NoSQL</a>
-            </div>
-            <div class="item-b">
-              <div class="itemb-1">数据库</div>
-              <div class="itemb-2">
-                <a class="itemb-3">SQL</a>
-                <a class="itemb-3">NoSQL</a>
-              </div>
-              <div class="itemb-1">课程推荐</div>
-            </div>
-          </div>
-              <div class="l-item">
-            <div class="item">
-              <a class="item-a" href>信息安全</a>
-              <a class="item-a" href>Web安全</a>
-              <a class="item-a" href>安全开发</a>
-            </div>
-            <div class="item-b">
-              <div class="itemb-1">信息安全</div>
-              <div class="itemb-2">
-                <a class="itemb-3">Web安全</a>
-                <a class="itemb-3">安全开发</a>
-              </div>
-              <div class="itemb-1">课程推荐</div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="b-foot">
+        <swiper ref="mySwiper" :options="swiperOptions">
+          <swiper-slide v-for="(item,index) in pics" :key="index">
+            <div class="beibei" :style="{background:item.background_color}">
+              <img :src="item.picture_url" alt />
+            </div>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 import axios from "axios";
 export default {
-  props: {},
   data() {
     return {
-      list:[]
+      obj: [],
+      pics: [],
+      swiperOptions: {
+        pagination: {
+          el: ".swiper-pagination"
+        },
+        autoplay: true
+      }
     };
   },
-  components: {},
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   methods: {
-     getData() {
+    getData() {
       axios
-        .get(" http://120.78.14.107/api/v2/index/categories")
+        .get("http://120.78.14.107/api/v2/index/banner-pictures")
         .then(res => {
-          this.list = res.data.tags;
-          this.$emit("getList", this.list);
+          this.pics = res.data;
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    getData1() {
+      axios
+        .get("http://120.78.14.107/api/v2/index/categories")
+        .then(res => {
+          this.obj = res.data;
+          console.log(res.data);
         })
         .catch(err => {
           console.log(err);
@@ -108,7 +90,7 @@ export default {
     }
   },
   mounted() {
-    this.getData();
+    this.getData(), this.getData1();
   },
   watch: {},
   computed: {}
@@ -120,19 +102,31 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
-  background: rgb(255, 204, 51);
+
+  position: relative;
   height: 515px;
+}
+.box_aaa {
+  width: 100%;
+  z-index: 99;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
 }
 .mildle {
   width: 1200px;
-  padding-left: 10px;
-  height: 100%;
-  background: chocolate;
+  margin-left: 20px;
+}
+.b-foot {
+  width: 100%;
 }
 .left {
   width: 260px;
   background: rgba(0, 0, 0, 0.18);
-  margin-left: 5px;
+  height: 102%;
 }
 .l-item {
   display: flex;
@@ -151,7 +145,7 @@ export default {
 .item {
   display: flex;
   width: 240px;
-  height: 50px;
+  height: 58px;
   align-items: center;
   justify-content: space-around;
   border-bottom: 1px solid white;
@@ -170,7 +164,6 @@ a {
   height: 300px;
   position: absolute;
   background: white;
-  top: 0;
   left: 260px;
   visibility: hidden;
 }
@@ -189,6 +182,8 @@ a {
   margin-left: 20px;
   margin-top: 10px;
   display: flex;
+  word-break: keep-all;
+  flex-wrap: wrap;
 }
 
 .itemb-3 {
@@ -197,6 +192,20 @@ a {
   padding: 2px;
 }
 .itemb-3:hover {
+  color: #08bf91;
+}
+.beibei {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+.itemb-4 {
+  color: black;
+  margin-left: 20px;
+  margin-top: 10px;
+  padding: 2px;
+}
+.itemb-4:hover {
   color: #08bf91;
 }
 </style>
