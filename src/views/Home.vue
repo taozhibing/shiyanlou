@@ -4,6 +4,7 @@
 <navtitle></navtitle>
 <nbv></nbv>
 <ncv></ncv>
+<ndv></ndv>
 </div>
  </div>
 </template>
@@ -12,6 +13,7 @@
 import Navtitle from '../components/home/Navtitle'
 import Nbv from '../components/home/Nbv'
 import Ncv from '../components/home/Ncv'
+import Ndv from '../components/home/Ndv'
  export default {
    data () {
      return {
@@ -23,7 +25,8 @@ import Ncv from '../components/home/Ncv'
    components: {
      Navtitle,
      Nbv,
-     Ncv
+     Ncv,
+     Ndv
 
    },
    methods: {
@@ -32,6 +35,9 @@ import Ncv from '../components/home/Ncv'
      },
      getArr(data) {
        this.arr = data
+     },
+     getArr1(data) {
+       this.arr1 = data
      }
    },
    mounted() {
