@@ -15,7 +15,8 @@ import Ncv from '../components/home/Ncv'
  export default {
    data () {
      return {
-       list:[]
+       list:[],
+       arr : []
 
      }
    },
@@ -28,6 +29,9 @@ import Ncv from '../components/home/Ncv'
    methods: {
      getList(data) {
        this.list = data
+     },
+     getArr(data) {
+       this.arr = data
      }
    },
    mounted() {
